@@ -3,87 +3,93 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Christmas Friendly Feud – Bonus Holiday Pack</title>
+  <title>Friendly Feud – Bonus Pack</title>
   <style>
-    :root {
-      --red:        #C41230;
-      --dark-red:   #A30F28;
-      --stripe:     rgba(0,0,0,0.07);
-      --green:      #1C5C2C;
-      --dark-green: #134421;
-      --gold:       #FFD700;
-      --white:      #FFFFFF;
-    }
-
+    /* ══════════════════════════════════════════
+       BASE
+    ══════════════════════════════════════════ */
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Arial Black', 'Arial Bold', 'Helvetica Neue', Arial, sans-serif;
       min-height: 100vh;
-      background-color: var(--red);
+      color: #fff;
+      overflow-x: hidden;
+      transition: background-color .4s;
+    }
+
+    /* ── Christmas skin (default) ── */
+    body.xmas {
+      background-color: #C41230;
       background-image: repeating-linear-gradient(
         180deg,
         transparent 0px, transparent 14px,
-        var(--stripe) 14px, var(--stripe) 28px
+        rgba(0,0,0,.07) 14px, rgba(0,0,0,.07) 28px
       );
-      color: var(--white);
-      overflow-x: hidden;
+    }
+    /* ── Party skin ── */
+    body.party {
+      background-color: #0D3B8C;
+      background-image: repeating-linear-gradient(
+        180deg,
+        transparent 0px, transparent 14px,
+        rgba(0,0,0,.1) 14px, rgba(0,0,0,.1) 28px
+      );
     }
 
-    /* ─── SNOW ─────────────────────────────────── */
-    #snow {
+    /* ══════════════════════════════════════════
+       PARTICLES
+    ══════════════════════════════════════════ */
+    #particles {
       position: fixed; inset: 0;
-      pointer-events: none; z-index: 0;
-      overflow: hidden;
+      pointer-events: none; z-index: 0; overflow: hidden;
     }
-    .flake {
+    .particle {
       position: absolute; top: -30px;
-      color: rgba(255,255,255,0.55);
       animation: drift linear infinite;
       user-select: none; line-height: 1;
     }
     @keyframes drift {
-      0%   { transform: translateY(0)     rotate(0deg);   opacity: .55; }
-      100% { transform: translateY(110vh) rotate(540deg); opacity: 0;   }
+      0%   { transform: translateY(0)     rotate(0deg);   opacity: .6; }
+      100% { transform: translateY(110vh) rotate(540deg); opacity: 0;  }
     }
 
-    /* ─── UNLOCK SCREEN ────────────────────────── */
+    /* ══════════════════════════════════════════
+       UNLOCK SCREEN
+    ══════════════════════════════════════════ */
     #unlock-screen {
       position: relative; z-index: 1;
       min-height: 100vh;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      padding: 32px 16px 48px;
-      gap: 24px;
+      padding: 32px 16px 48px; gap: 24px;
     }
 
     .logo-block { text-align: center; }
-    .logo-stars { color: var(--gold); font-size: 22px; letter-spacing: 8px; }
+    .logo-stars { color: #FFD700; font-size: 22px; letter-spacing: 8px; }
     .logo-title {
       font-size: clamp(26px, 7vw, 48px);
       font-weight: 900; line-height: 1.05;
       text-transform: uppercase; letter-spacing: 2px;
       text-shadow: 3px 3px 0 rgba(0,0,0,.35);
     }
-    .logo-title .t-gold  { color: var(--gold); }
+    .logo-title .t-gold  { color: #FFD700; }
     .logo-title .t-green { color: #90EE90; }
 
     .unlock-box {
-      background: var(--green);
-      border: 4px solid var(--white);
+      background: #1C5C2C;
+      border: 4px solid #fff;
       border-radius: 18px;
       padding: 32px 24px 28px;
       max-width: 460px; width: 100%;
       box-shadow: 0 10px 40px rgba(0,0,0,.45);
       text-align: center;
     }
-
     .unlock-box h2 {
       font-size: clamp(22px, 5vw, 30px);
       font-weight: 900; text-transform: uppercase;
       letter-spacing: 1px; line-height: 1.15;
-      color: var(--gold);
-      text-shadow: 2px 2px 0 rgba(0,0,0,.4);
+      color: #FFD700; text-shadow: 2px 2px 0 rgba(0,0,0,.4);
       margin-bottom: 6px;
     }
     .unlock-box .sub {
@@ -91,10 +97,7 @@
       margin-bottom: 22px; line-height: 1.4;
     }
 
-    .features {
-      display: flex; flex-direction: column; gap: 10px;
-      margin-bottom: 26px; text-align: left;
-    }
+    .features { display: flex; flex-direction: column; gap: 10px; margin-bottom: 26px; text-align: left; }
     .feat {
       display: flex; align-items: center; gap: 14px;
       background: rgba(255,255,255,.1);
@@ -104,18 +107,18 @@
     .feat-icon { font-size: 26px; flex-shrink: 0; }
     .feat strong {
       display: block; font-size: 14px; font-weight: 900;
-      text-transform: uppercase; letter-spacing: .4px; color: var(--gold);
+      text-transform: uppercase; letter-spacing: .4px; color: #FFD700;
     }
     .feat span { font-size: 12px; opacity: .75; font-weight: 400; }
 
     .email-form { display: flex; flex-direction: column; gap: 10px; }
     .email-input {
       padding: 14px 16px; border-radius: 10px;
-      border: 3px solid var(--white); background: var(--white);
+      border: 3px solid #fff; background: #fff;
       color: #222; font-size: 16px; font-family: inherit; outline: none; width: 100%;
     }
     .email-input::placeholder { color: #aaa; }
-    .email-input:focus { border-color: var(--gold); }
+    .email-input:focus { border-color: #FFD700; }
 
     .unlock-btn {
       padding: 16px; border-radius: 10px; border: none;
@@ -129,79 +132,107 @@
     .unlock-btn:hover  { transform: translateY(-2px); box-shadow: 0 7px 20px rgba(0,0,0,.4); }
     .unlock-btn:active { transform: translateY(0); }
 
-    .disclaimer {
-      font-size: 11px; opacity: .55; font-weight: 400; margin-top: 10px; line-height: 1.4;
-    }
+    .disclaimer { font-size: 11px; opacity: .55; font-weight: 400; margin-top: 10px; line-height: 1.4; }
+    .holiday-club { font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #FFD700; text-shadow: 1px 1px 0 rgba(0,0,0,.4); }
 
-    .holiday-club {
-      font-size: 12px; font-weight: 700; letter-spacing: 1px;
-      text-transform: uppercase; color: var(--gold);
-      text-shadow: 1px 1px 0 rgba(0,0,0,.4);
-    }
+    /* ══════════════════════════════════════════
+       APP SCREEN
+    ══════════════════════════════════════════ */
+    #app-screen { display: none; flex-direction: column; min-height: 100vh; position: relative; z-index: 1; }
 
-    /* ─── APP SCREEN ───────────────────────────── */
-    #app-screen {
-      display: none; flex-direction: column; min-height: 100vh;
-      position: relative; z-index: 1;
-    }
-
+    /* Header */
     .app-header {
-      background: var(--dark-green);
-      border-bottom: 4px solid var(--gold);
-      padding: 14px 20px;
-      text-align: center;
-      position: sticky; top: 0; z-index: 200;
+      padding: 12px 20px; text-align: center;
+      position: sticky; top: 0; z-index: 300;
+      transition: background .4s;
     }
-    .app-header h1 {
-      font-size: clamp(15px, 3.5vw, 24px);
-      font-weight: 900; text-transform: uppercase;
-      letter-spacing: 2px;
-      text-shadow: 2px 2px 0 rgba(0,0,0,.4);
-    }
-    .app-header .hdr-sub {
-      color: var(--gold); font-size: 11px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 2px; margin-top: 2px;
-    }
+    body.xmas  .app-header { background: #134421; border-bottom: 4px solid #FFD700; }
+    body.party .app-header { background: #071f52; border-bottom: 4px solid #FFD700; }
 
-    /* Tabs */
-    .tabs {
-      display: flex; background: var(--dark-red);
-      border-bottom: 3px solid rgba(255,255,255,.18);
-      position: sticky; top: 64px; z-index: 199;
+    .app-header h1 {
+      font-size: clamp(14px, 3.2vw, 22px);
+      font-weight: 900; text-transform: uppercase;
+      letter-spacing: 2px; text-shadow: 2px 2px 0 rgba(0,0,0,.4);
     }
-    @media(max-width:400px) { .tabs { top: 72px; } }
+    .hdr-sub { color: #FFD700; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-top: 2px; }
+
+    /* ── THEME PICKER ── */
+    .theme-picker {
+      display: flex; gap: 0;
+      position: sticky; top: 58px; z-index: 299;
+      transition: background .4s;
+    }
+    body.xmas  .theme-picker { background: #0f3318; border-bottom: 2px solid rgba(255,255,255,.12); }
+    body.party .theme-picker { background: #051848; border-bottom: 2px solid rgba(255,255,255,.12); }
+
+    .theme-btn {
+      flex: 1; padding: 11px 8px; border: none;
+      background: transparent;
+      color: rgba(255,255,255,.55);
+      font-size: 12px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: .8px;
+      cursor: pointer; font-family: inherit;
+      border-bottom: 3px solid transparent;
+      transition: color .2s, border-color .2s, background .2s;
+      line-height: 1.3;
+    }
+    .theme-btn span { display: block; font-size: 18px; margin-bottom: 2px; }
+
+    /* active states per skin */
+    body.xmas  .theme-btn.xmas-btn.active,
+    body.xmas  .theme-btn.xmas-btn:hover  { color: #90EE90; border-bottom-color: #90EE90; background: rgba(255,255,255,.06); }
+    body.party .theme-btn.party-btn.active,
+    body.party .theme-btn.party-btn:hover { color: #FFD700; border-bottom-color: #FFD700; background: rgba(255,255,255,.06); }
+    body.xmas  .theme-btn.party-btn:hover,
+    body.party .theme-btn.xmas-btn:hover  { color: rgba(255,255,255,.8); background: rgba(255,255,255,.04); border-bottom-color: rgba(255,255,255,.3); }
+
+    /* active glow */
+    .theme-btn.active { color: #FFD700 !important; border-bottom-color: #FFD700 !important; background: rgba(255,255,255,.07) !important; }
+
+    /* ── CARD TYPE TABS ── */
+    .tabs {
+      display: flex;
+      position: sticky; top: 116px; z-index: 298;
+      border-bottom: 2px solid rgba(255,255,255,.15);
+      transition: background .4s;
+    }
+    body.xmas  .tabs { background: #1a3d10; }
+    body.party .tabs { background: #0a2460; }
 
     .tab-btn {
-      flex: 1; padding: 13px 6px; border: none;
-      background: transparent; color: rgba(255,255,255,.65);
-      font-size: 12px; font-weight: 900; text-transform: uppercase;
-      letter-spacing: 1px; cursor: pointer; font-family: inherit;
+      flex: 1; padding: 11px 6px; border: none;
+      background: transparent; color: rgba(255,255,255,.6);
+      font-size: 12px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: 1px;
+      cursor: pointer; font-family: inherit;
       border-bottom: 3px solid transparent;
       transition: color .2s, border-color .2s, background .2s;
     }
-    .tab-btn.active {
-      color: var(--gold); border-bottom-color: var(--gold);
-      background: rgba(255,255,255,.07);
-    }
+    .tab-btn.active { color: #FFD700; border-bottom-color: #FFD700; background: rgba(255,255,255,.07); }
 
-    /* Tab panels */
+    /* ── TAB PANELS ── */
     .tab-panel { display: none; padding: 22px 14px 50px; }
     .tab-panel.active { display: block; }
 
-    .section-hdr {
-      text-align: center; margin-bottom: 22px;
-    }
+    .section-hdr { text-align: center; margin-bottom: 22px; }
     .section-hdr h2 {
       font-size: clamp(17px, 4vw, 24px); font-weight: 900;
       text-transform: uppercase; letter-spacing: 2px;
-      color: var(--gold); text-shadow: 2px 2px 0 rgba(0,0,0,.4);
+      color: #FFD700; text-shadow: 2px 2px 0 rgba(0,0,0,.4);
     }
-    .section-hdr .dec { color: var(--gold); font-size: 18px; letter-spacing: 6px; margin: 5px 0; display: block; }
+    .section-hdr .dec { color: #FFD700; font-size: 18px; letter-spacing: 6px; margin: 5px 0; display: block; }
     .section-hdr p { font-size: 13px; opacity: .7; font-weight: 400; margin-top: 2px; }
 
-    .bulk-btns {
-      display: flex; gap: 8px; justify-content: center; margin-bottom: 18px; flex-wrap: wrap;
+    .count-badge {
+      display: inline-block;
+      background: rgba(255,255,255,.15);
+      border: 2px solid rgba(255,255,255,.3);
+      border-radius: 20px; padding: 3px 14px;
+      font-size: 12px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px; margin-top: 6px;
     }
+
+    .bulk-btns { display: flex; gap: 8px; justify-content: center; margin-bottom: 18px; flex-wrap: wrap; }
     .bulk-btn {
       padding: 7px 16px; border-radius: 20px;
       border: 2px solid rgba(255,255,255,.4);
@@ -211,45 +242,49 @@
       cursor: pointer; font-family: inherit;
       transition: background .2s;
     }
-    .bulk-btn:hover { background: rgba(255,255,255,.2); }
+    .bulk-btn:hover { background: rgba(255,255,255,.22); }
 
-    /* ─── REGULAR QUESTION CARDS ───────────────── */
+    /* ══════════════════════════════════════════
+       QUESTION CARDS
+    ══════════════════════════════════════════ */
     .cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
       gap: 18px; max-width: 1200px; margin: 0 auto;
     }
 
     .q-card {
-      background: var(--green);
-      border: 3px solid var(--white);
-      border-radius: 14px; overflow: hidden;
-      cursor: pointer;
+      border: 3px solid #fff; border-radius: 14px;
+      overflow: hidden; cursor: pointer;
       box-shadow: 0 4px 18px rgba(0,0,0,.3);
       transition: transform .2s, box-shadow .2s;
     }
     .q-card:hover { transform: translateY(-3px); box-shadow: 0 8px 26px rgba(0,0,0,.4); }
 
+    body.xmas  .q-card      { background: #1C5C2C; }
+    body.xmas  .q-card-head { background: #134421; }
+    body.party .q-card      { background: #1a3a8c; }
+    body.party .q-card-head { background: #0f2870; }
+
     .q-card-head {
-      background: var(--dark-green);
       padding: 13px 14px;
       display: flex; align-items: flex-start; gap: 10px;
     }
     .q-num {
-      background: white; color: var(--dark-green);
-      font-size: 12px; font-weight: 900;
+      background: white; font-size: 12px; font-weight: 900;
       min-width: 30px; height: 30px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
+    body.xmas  .q-num { color: #134421; }
+    body.party .q-num { color: #0f2870; }
+
     .q-text { font-size: 15px; font-weight: 700; line-height: 1.3; flex: 1; }
     .q-chevron { font-size: 12px; opacity: .65; flex-shrink: 0; margin-top: 3px; }
 
     .q-answers { display: none; padding: 12px 12px 14px; }
     .q-answers.open { display: block; }
 
-    .ans-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 7px;
-    }
+    .ans-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
     @media(max-width: 380px) { .ans-grid { grid-template-columns: 1fr; } }
 
     .ans-row {
@@ -259,39 +294,42 @@
     }
     .ans-label { color: #1a1a1a; font-size: 13px; font-weight: 600; line-height: 1.2; flex: 1; }
     .ans-pts {
-      background: var(--dark-green); color: white;
-      font-size: 13px; font-weight: 900;
+      color: white; font-size: 13px; font-weight: 900;
       min-width: 30px; height: 30px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
+    body.xmas  .ans-pts { background: #134421; }
+    body.party .ans-pts { background: #0f2870; }
 
     .q-hint {
       text-align: center; font-size: 11px;
-      color: rgba(255,255,255,.45); padding: 6px;
+      color: rgba(255,255,255,.4); padding: 6px;
       text-transform: uppercase; letter-spacing: 1px;
     }
 
-    /* ─── FINAL ROUND CARDS ────────────────────── */
+    /* ══════════════════════════════════════════
+       FINAL ROUND CARDS
+    ══════════════════════════════════════════ */
     .fr-card {
-      background: var(--green);
-      border: 3px solid var(--white);
-      border-radius: 14px; overflow: hidden;
+      border: 3px solid #fff; border-radius: 14px;
+      overflow: hidden;
       max-width: 720px; margin: 0 auto 22px;
       box-shadow: 0 4px 18px rgba(0,0,0,.3);
     }
+    body.xmas  .fr-card { background: #1C5C2C; }
+    body.party .fr-card { background: #1a3a8c; }
 
     .fr-card-head {
-      background: white; color: var(--dark-green);
-      padding: 14px 20px; text-align: center;
+      background: white; padding: 14px 20px; text-align: center;
     }
+    body.xmas  .fr-card-head { color: #134421; }
+    body.party .fr-card-head { color: #0f2870; }
+
     .fr-card-head h2 {
       font-size: 20px; font-weight: 900;
       letter-spacing: 3px; text-transform: uppercase;
     }
-    .fr-card-head .fr-sub {
-      font-size: 12px; opacity: .65; font-weight: 400;
-      margin-top: 2px;
-    }
+    .fr-card-head .fr-sub { font-size: 12px; opacity: .65; font-weight: 400; margin-top: 2px; }
 
     .fr-q-block {
       border-bottom: 2px solid rgba(255,255,255,.18);
@@ -299,49 +337,35 @@
     }
     .fr-q-block:last-child { border-bottom: none; }
 
-    .fr-q-row {
-      display: flex; align-items: flex-start; gap: 10px;
-    }
+    .fr-q-row { display: flex; align-items: flex-start; gap: 10px; }
     .fr-q-num {
-      background: white; color: var(--dark-green);
-      font-size: 11px; font-weight: 900;
+      background: white; font-size: 11px; font-weight: 900;
       min-width: 24px; height: 24px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-      margin-top: 2px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;
     }
+    body.xmas  .fr-q-num { color: #134421; }
+    body.party .fr-q-num { color: #0f2870; }
+
     .fr-q-text { font-size: 14px; font-weight: 700; line-height: 1.3; flex: 1; }
     .fr-q-chev { font-size: 11px; opacity: .6; flex-shrink: 0; }
 
     .fr-answers { display: none; margin-top: 10px; }
     .fr-answers.open { display: block; }
-
-    /* ─── MISC ─────────────────────────────────── */
-    .count-badge {
-      display: inline-block;
-      background: rgba(255,255,255,.15);
-      border: 2px solid rgba(255,255,255,.3);
-      border-radius: 20px; padding: 3px 14px;
-      font-size: 12px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 1px;
-      margin-top: 6px;
-    }
   </style>
 </head>
-<body>
+<body class="xmas">
 
-<!-- Snow layer -->
-<div id="snow"></div>
+<div id="particles"></div>
 
-<!-- ═══════════════════════════════════════════════
+<!-- ══════════════════════════════════════════
      UNLOCK SCREEN
-══════════════════════════════════════════════════ -->
+══════════════════════════════════════════ -->
 <div id="unlock-screen">
-
   <div class="logo-block">
     <div class="logo-stars">★ ★ ★ ★ ★</div>
     <div class="logo-title">
-      <span class="t-gold">Christmas</span><br>
-      <span class="t-green">Friendly Feud</span>
+      <span class="t-gold">Friendly</span><br>
+      <span class="t-green">Feud</span>
     </div>
     <div class="logo-stars" style="margin-top:4px">★ ★ ★ ★ ★</div>
   </div>
@@ -352,24 +376,24 @@
 
     <div class="features">
       <div class="feat">
-        <div class="feat-icon">❓</div>
-        <div>
-          <strong>40 Extra Question Cards</strong>
-          <span>All-new survey questions for your next game night</span>
-        </div>
-      </div>
-      <div class="feat">
-        <div class="feat-icon">🏆</div>
-        <div>
-          <strong>5 Bonus Final Round Cards</strong>
-          <span>Fresh high-stakes final rounds with 5 questions each</span>
-        </div>
-      </div>
-      <div class="feat">
         <div class="feat-icon">🎄</div>
         <div>
+          <strong>40 Christmas Question Cards</strong>
+          <span>All-new Christmas survey questions + 5 Final Round cards</span>
+        </div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">🎉</div>
+        <div>
+          <strong>40 Party Edition Cards</strong>
+          <span>Year-round questions for any occasion + 5 Final Round cards</span>
+        </div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">✨</div>
+        <div>
           <strong>New Content Every Season</strong>
-          <span>More holiday fun added throughout the year</span>
+          <span>More fun added throughout the year</span>
         </div>
       </div>
     </div>
@@ -388,25 +412,36 @@
   <div class="holiday-club">★ Join the Well Balanced Holiday Club ★</div>
 </div>
 
-<!-- ═══════════════════════════════════════════════
+<!-- ══════════════════════════════════════════
      APP SCREEN
-══════════════════════════════════════════════════ -->
+══════════════════════════════════════════ -->
 <div id="app-screen">
 
   <div class="app-header">
-    <h1>🎄 Christmas Friendly Feud</h1>
-    <div class="hdr-sub">✦ Bonus Holiday Pack ✦</div>
+    <h1 id="app-title">🎄 Christmas Friendly Feud</h1>
+    <div class="hdr-sub">✦ Bonus Pack ✦</div>
   </div>
 
+  <!-- Theme picker -->
+  <div class="theme-picker">
+    <button class="theme-btn xmas-btn active" id="btn-xmas" onclick="switchTheme('xmas')">
+      <span>🎄</span>Christmas Edition
+    </button>
+    <button class="theme-btn party-btn" id="btn-party" onclick="switchTheme('party')">
+      <span>🎉</span>Party Edition
+    </button>
+  </div>
+
+  <!-- Card type tabs -->
   <div class="tabs">
     <button class="tab-btn active" onclick="showTab('regular',this)">❄ Question Cards</button>
     <button class="tab-btn"        onclick="showTab('final',this)">🏆 Final Round Cards</button>
   </div>
 
-  <!-- ── REGULAR CARDS tab ── -->
+  <!-- Regular cards panel -->
   <div id="panel-regular" class="tab-panel active">
     <div class="section-hdr">
-      <h2>Bonus Question Cards</h2>
+      <h2 id="reg-heading">Bonus Christmas Question Cards</h2>
       <span class="dec">★ ★ ★ ★ ★</span>
       <p>Tap any card to reveal the answers</p>
       <span class="count-badge">40 Cards</span>
@@ -418,10 +453,10 @@
     <div class="cards-grid" id="regular-grid"></div>
   </div>
 
-  <!-- ── FINAL ROUND tab ── -->
+  <!-- Final round panel -->
   <div id="panel-final" class="tab-panel">
     <div class="section-hdr">
-      <h2>Bonus Final Round Cards</h2>
+      <h2 id="fin-heading">Bonus Christmas Final Round Cards</h2>
       <span class="dec">★ ★ ★ ★ ★</span>
       <p>Tap any question to reveal answers</p>
       <span class="count-badge">5 Cards · 25 Questions</span>
@@ -436,327 +471,241 @@
 </div>
 
 <script>
-/* ═══════════════════════════════════════════════
-   DATA — 40 Regular Questions
-═══════════════════════════════════════════════ */
-const REGULAR = [
-  {
-    q: "Name a popular Christmas movie.",
-    a: [["Home Alone",32],["Elf",27],["The Grinch",18],["A Christmas Carol",13],["It's a Wonderful Life",7],["National Lampoon's Christmas Vacation",3]]
-  },
-  {
-    q: "Name something you put on a Christmas tree.",
-    a: [["Ornaments",35],["Lights",28],["Star / angel on top",18],["Tinsel",10],["Garland",6],["Candy canes",3]]
-  },
-  {
-    q: "Name something Santa is famous for.",
-    a: [["Delivering gifts",36],["Saying 'Ho ho ho'",26],["Riding a sleigh",18],["His red suit",12],["The naughty/nice list",5],["Eating cookies",3]]
-  },
-  {
-    q: "Name a reindeer besides Rudolph.",
-    a: [["Dasher",28],["Dancer",22],["Prancer",18],["Comet",16],["Cupid",10],["Blitzen",6]]
-  },
-  {
-    q: "Name something people do on Christmas morning.",
-    a: [["Open presents",42],["Eat breakfast",24],["Call or visit family",14],["Watch Christmas movies",11],["Go to church",6],["Take photos",3]]
-  },
-  {
-    q: "Name something families do on Christmas Eve.",
-    a: [["Watch Christmas movies",32],["Wrap presents",26],["Attend church / Mass",18],["Open one gift",14],["Bake cookies",7],["Play board games",3]]
-  },
-  {
-    q: "Name something you find in a Christmas stocking.",
-    a: [["Candy / chocolate",36],["Small toys",22],["Gift cards",18],["Oranges / fruit",12],["Socks",8],["Money",4]]
-  },
-  {
-    q: "Name something people eat at Christmas dinner.",
-    a: [["Turkey / ham",38],["Mashed potatoes",24],["Stuffing / dressing",16],["Green bean casserole",12],["Pie / dessert",7],["Rolls / bread",3]]
-  },
-  {
-    q: "Name a place people go Christmas shopping.",
-    a: [["Online / Amazon",36],["The mall",28],["Target",17],["Walmart",12],["Local boutiques",5],["Outlet stores",2]]
-  },
-  {
-    q: "Name something that can go wrong at Christmas dinner.",
-    a: [["Food burns or overcooks",32],["Family argument breaks out",24],["Not enough food",18],["A guest arrives late",14],["Power goes out",8],["Pet eats the food",4]]
-  },
-  {
-    q: "Name something people use to decorate their house for Christmas.",
-    a: [["Lights",40],["Wreath on the door",26],["Christmas tree",18],["Garland",9],["Inflatable decorations",5],["Candles",2]]
-  },
-  {
-    q: "Name something that makes Christmas feel magical.",
-    a: [["Snow falling",35],["Christmas lights",27],["Family being together",20],["Kids' excitement",12],["Christmas music",4],["Gifts and surprises",2]]
-  },
-  {
-    q: "Name a Christmas gift that's hard to wrap.",
-    a: [["Bicycle",34],["Large TV or electronics",26],["Sports equipment",18],["Oddly shaped toys",12],["Clothes",7],["Furniture",3]]
-  },
-  {
-    q: "Name something people argue about at Christmas.",
-    a: [["What to watch on TV",28],["How to cook the food",22],["The gift exchange",18],["Family drama",17],["Travel plans",10],["Decorations",5]]
-  },
-  {
-    q: "Name a popular holiday dessert.",
-    a: [["Christmas cookies",36],["Pecan or pumpkin pie",24],["Gingerbread",18],["Yule log cake",12],["Fruitcake",7],["Candy cane treats",3]]
-  },
-  {
-    q: "Name a reason people feel stressed during Christmas.",
-    a: [["Spending too much money",34],["Family drama",24],["Shopping crowds",18],["Party planning",12],["Holiday travel",8],["Finding the right gift",4]]
-  },
-  {
-    q: "Name something people do at a Christmas party.",
-    a: [["Gift exchange / Secret Santa",32],["Eat and drink",24],["Dance and listen to music",20],["Play party games",14],["Take group photos",7],["Go caroling",3]]
-  },
-  {
-    q: "Name a Christmas decoration outside the house.",
-    a: [["String lights",42],["Wreath on the door",25],["Inflatable decorations",16],["Nativity scene",10],["Reindeer figurines",5],["Christmas tree in window",2]]
-  },
-  {
-    q: "Name something people wear to a Christmas party.",
-    a: [["Ugly Christmas sweater",38],["Red or green outfit",22],["Formal wear",18],["Santa hat",14],["Elf costume",5],["Reindeer antlers",3]]
-  },
-  {
-    q: "Name a Christmas song that gets stuck in your head.",
-    a: [["Jingle Bells",30],["All I Want for Christmas Is You",26],["Deck the Halls",18],["Rudolph the Red-Nosed Reindeer",14],["Frosty the Snowman",8],["Last Christmas",4]]
-  },
-  {
-    q: "Name a gift people commonly give at a work Secret Santa.",
-    a: [["Gift card",38],["Chocolates or candy",24],["Candle",18],["Wine or alcohol",12],["Mug",5],["Book",3]]
-  },
-  {
-    q: "Name something that runs out quickly at Christmas dinner.",
-    a: [["Mashed potatoes",32],["Rolls or bread",26],["Dessert or pie",20],["Gravy",14],["Turkey or ham",6],["Drinks",2]]
-  },
-  {
-    q: "Name something a child might ask Santa for.",
-    a: [["New toys",32],["Video games or tablet",26],["A pet",18],["Bike or scooter",14],["Money",7],["Clothes",3]]
-  },
-  {
-    q: "Name something people forget to do during the holidays.",
-    a: [["Send Christmas cards",32],["Buy someone a gift",26],["RSVP to parties",18],["Decorate the house",14],["Take family photos",7],["Call relatives",3]]
-  },
-  {
-    q: "Name a color strongly associated with Christmas.",
-    a: [["Red",38],["Green",32],["Gold / yellow",16],["White",10],["Silver",3],["Blue",1]]
-  },
-  {
-    q: "Name something people do after Christmas dinner.",
-    a: [["Watch TV or movies",32],["Take a nap",28],["Play board games",18],["Go for a walk",12],["Open more gifts",7],["Clean up",3]]
-  },
-  {
-    q: "Name a reason someone might be on Santa's naughty list.",
-    a: [["Being mean to siblings",30],["Not doing chores",24],["Lying",18],["Being rude",16],["Fighting",9],["Staying up past bedtime",3]]
-  },
-  {
-    q: "Name something you'd find on a gingerbread house.",
-    a: [["Candy or gumdrops",38],["Icing or frosting",32],["Pretzel sticks",14],["Chocolate pieces",8],["Sprinkles",5],["Licorice",3]]
-  },
-  {
-    q: "Name something an Elf on the Shelf might be found doing.",
-    a: [["Getting into mischief",28],["Sitting on a shelf watching",24],["Playing with toys",18],["Eating cookies or candy",16],["Reading a book",10],["Writing a note to Santa",4]]
-  },
-  {
-    q: "Name something people give as a Christmas gift to a teacher.",
-    a: [["Gift card",40],["Mug",22],["Chocolates or treats",18],["Candle",12],["Homemade baked goods",6],["Wine",2]]
-  },
-  {
-    q: "Name something you might see at a Christmas parade.",
-    a: [["Santa Claus",38],["Floats",26],["Marching band",18],["Christmas characters",12],["Reindeer",4],["Elves",2]]
-  },
-  {
-    q: "Name something people make from scratch for Christmas.",
-    a: [["Cookies",36],["Christmas cards",22],["Gingerbread house",18],["Handmade gifts",12],["Wreath",9],["Ornaments",3]]
-  },
-  {
-    q: "Name something people do while wrapping Christmas presents.",
-    a: [["Watch Christmas movies",34],["Listen to Christmas music",26],["Drink hot chocolate or wine",20],["Chat with family",12],["Eat snacks",6],["Stress out",2]]
-  },
-  {
-    q: "Name something people say on Christmas morning.",
-    a: [["Merry Christmas!",42],["Thank you!",28],["Look what I got!",16],["Oh wow!",8],["I love it!",4],["Santa came!",2]]
-  },
-  {
-    q: "Name something a Christmas elf would wear.",
-    a: [["Green or red hat",36],["Pointy shoes",22],["Jingle bells",20],["Green and red outfit",14],["Striped stockings",6],["Suspenders",2]]
-  },
-  {
-    q: "Name something people do to get ready for Christmas.",
-    a: [["Decorate the house",34],["Go Christmas shopping",28],["Bake or cook",18],["Clean the house",12],["Plan the menu",6],["Send Christmas cards",2]]
-  },
-  {
-    q: "Name something associated with the North Pole.",
-    a: [["Santa Claus",38],["Elves",26],["Reindeer",18],["Snow and ice",12],["Toy workshop",4],["Mrs. Claus",2]]
-  },
-  {
-    q: "Name something people donate to charity during Christmas.",
-    a: [["Toys",36],["Food or canned goods",28],["Clothing",18],["Money",12],["Time or volunteering",4],["Blankets or coats",2]]
-  },
-  {
-    q: "Name a beloved fictional Christmas character.",
-    a: [["Santa Claus",36],["Rudolph",22],["Frosty the Snowman",18],["The Grinch",14],["Buddy the Elf",8],["Jack Frost",2]]
-  },
-  {
-    q: "Name something people say they'll do after Christmas but never do.",
-    a: [["Go on a diet or lose weight",36],["Organize the house",24],["Save more money",18],["Return unwanted gifts",12],["Call family more often",8],["Declutter old decorations",2]]
-  }
+/* ══════════════════════════════════════════════════
+   DATA – CHRISTMAS (40 regular + 5 final rounds)
+══════════════════════════════════════════════════ */
+const XMAS_REGULAR = [
+  { q:"Name a popular Christmas movie.", a:[["Home Alone",32],["Elf",27],["The Grinch",18],["A Christmas Carol",13],["It's a Wonderful Life",7],["National Lampoon's Christmas Vacation",3]] },
+  { q:"Name something you put on a Christmas tree.", a:[["Ornaments",35],["Lights",28],["Star / angel on top",18],["Tinsel",10],["Garland",6],["Candy canes",3]] },
+  { q:"Name something Santa is famous for.", a:[["Delivering gifts",36],["Saying 'Ho ho ho'",26],["Riding a sleigh",18],["His red suit",12],["The naughty/nice list",5],["Eating cookies",3]] },
+  { q:"Name a reindeer besides Rudolph.", a:[["Dasher",28],["Dancer",22],["Prancer",18],["Comet",16],["Cupid",10],["Blitzen",6]] },
+  { q:"Name something people do on Christmas morning.", a:[["Open presents",42],["Eat breakfast",24],["Call or visit family",14],["Watch Christmas movies",11],["Go to church",6],["Take photos",3]] },
+  { q:"Name something families do on Christmas Eve.", a:[["Watch Christmas movies",32],["Wrap presents",26],["Attend church / Mass",18],["Open one gift early",14],["Bake cookies",7],["Play board games",3]] },
+  { q:"Name something you find in a Christmas stocking.", a:[["Candy / chocolate",36],["Small toys",22],["Gift cards",18],["Oranges / fruit",12],["Socks",8],["Money",4]] },
+  { q:"Name something people eat at Christmas dinner.", a:[["Turkey / ham",38],["Mashed potatoes",24],["Stuffing / dressing",16],["Green bean casserole",12],["Pie / dessert",7],["Rolls / bread",3]] },
+  { q:"Name a place people go Christmas shopping.", a:[["Online / Amazon",36],["The mall",28],["Target",17],["Walmart",12],["Local boutiques",5],["Outlet stores",2]] },
+  { q:"Name something that can go wrong at Christmas dinner.", a:[["Food burns or overcooks",32],["Family argument breaks out",24],["Not enough food",18],["A guest arrives late",14],["Power goes out",8],["Pet eats the food",4]] },
+  { q:"Name something people use to decorate their house for Christmas.", a:[["Lights",40],["Wreath on the door",26],["Christmas tree",18],["Garland",9],["Inflatable decorations",5],["Candles",2]] },
+  { q:"Name something that makes Christmas feel magical.", a:[["Snow falling",35],["Christmas lights",27],["Family being together",20],["Kids' excitement",12],["Christmas music",4],["Gifts and surprises",2]] },
+  { q:"Name a Christmas gift that's hard to wrap.", a:[["Bicycle",34],["Large TV or electronics",26],["Sports equipment",18],["Oddly shaped toys",12],["Clothes",7],["Furniture",3]] },
+  { q:"Name something people argue about at Christmas.", a:[["What to watch on TV",28],["How to cook the food",22],["The gift exchange",18],["Family drama",17],["Travel plans",10],["Decorations",5]] },
+  { q:"Name a popular holiday dessert.", a:[["Christmas cookies",36],["Pecan or pumpkin pie",24],["Gingerbread",18],["Yule log cake",12],["Fruitcake",7],["Candy cane treats",3]] },
+  { q:"Name a reason people feel stressed during Christmas.", a:[["Spending too much money",34],["Family drama",24],["Shopping crowds",18],["Party planning",12],["Holiday travel",8],["Finding the right gift",4]] },
+  { q:"Name something people do at a Christmas party.", a:[["Gift exchange / Secret Santa",32],["Eat and drink",24],["Dance and listen to music",20],["Play party games",14],["Take group photos",7],["Go caroling",3]] },
+  { q:"Name a Christmas decoration outside the house.", a:[["String lights",42],["Wreath on the door",25],["Inflatable decorations",16],["Nativity scene",10],["Reindeer figurines",5],["Christmas tree in window",2]] },
+  { q:"Name something people wear to a Christmas party.", a:[["Ugly Christmas sweater",38],["Red or green outfit",22],["Formal wear",18],["Santa hat",14],["Elf costume",5],["Reindeer antlers",3]] },
+  { q:"Name a Christmas song that gets stuck in your head.", a:[["Jingle Bells",30],["All I Want for Christmas Is You",26],["Deck the Halls",18],["Rudolph the Red-Nosed Reindeer",14],["Frosty the Snowman",8],["Last Christmas",4]] },
+  { q:"Name a gift people commonly give at a work Secret Santa.", a:[["Gift card",38],["Chocolates or candy",24],["Candle",18],["Wine or alcohol",12],["Mug",5],["Book",3]] },
+  { q:"Name something that runs out quickly at Christmas dinner.", a:[["Mashed potatoes",32],["Rolls or bread",26],["Dessert or pie",20],["Gravy",14],["Turkey or ham",6],["Drinks",2]] },
+  { q:"Name something a child might ask Santa for.", a:[["New toys",32],["Video games or tablet",26],["A pet",18],["Bike or scooter",14],["Money",7],["Clothes",3]] },
+  { q:"Name something people forget to do during the holidays.", a:[["Send Christmas cards",32],["Buy someone a gift",26],["RSVP to parties",18],["Decorate the house",14],["Take family photos",7],["Call relatives",3]] },
+  { q:"Name a color strongly associated with Christmas.", a:[["Red",38],["Green",32],["Gold / yellow",16],["White",10],["Silver",3],["Blue",1]] },
+  { q:"Name something people do after Christmas dinner.", a:[["Watch TV or movies",32],["Take a nap",28],["Play board games",18],["Go for a walk",12],["Open more gifts",7],["Clean up",3]] },
+  { q:"Name a reason someone might be on Santa's naughty list.", a:[["Being mean to siblings",30],["Not doing chores",24],["Lying",18],["Being rude",16],["Fighting",9],["Staying up past bedtime",3]] },
+  { q:"Name something you'd find on a gingerbread house.", a:[["Candy or gumdrops",38],["Icing or frosting",32],["Pretzel sticks",14],["Chocolate pieces",8],["Sprinkles",5],["Licorice",3]] },
+  { q:"Name something an Elf on the Shelf might be found doing.", a:[["Getting into mischief",28],["Sitting on a shelf watching",24],["Playing with toys",18],["Eating cookies or candy",16],["Reading a book",10],["Writing a note to Santa",4]] },
+  { q:"Name something people give as a Christmas gift to a teacher.", a:[["Gift card",40],["Mug",22],["Chocolates or treats",18],["Candle",12],["Homemade baked goods",6],["Wine",2]] },
+  { q:"Name something you might see at a Christmas parade.", a:[["Santa Claus",38],["Floats",26],["Marching band",18],["Christmas characters",12],["Reindeer",4],["Elves",2]] },
+  { q:"Name something people make from scratch for Christmas.", a:[["Cookies",36],["Christmas cards",22],["Gingerbread house",18],["Handmade gifts",12],["Wreath",9],["Ornaments",3]] },
+  { q:"Name something people do while wrapping Christmas presents.", a:[["Watch Christmas movies",34],["Listen to Christmas music",26],["Drink hot chocolate or wine",20],["Chat with family",12],["Eat snacks",6],["Stress out",2]] },
+  { q:"Name something people say on Christmas morning.", a:[["Merry Christmas!",42],["Thank you!",28],["Look what I got!",16],["Oh wow!",8],["I love it!",4],["Santa came!",2]] },
+  { q:"Name something a Christmas elf would wear.", a:[["Green or red hat",36],["Pointy shoes",22],["Jingle bells",20],["Green and red outfit",14],["Striped stockings",6],["Suspenders",2]] },
+  { q:"Name something people do to get ready for Christmas.", a:[["Decorate the house",34],["Go Christmas shopping",28],["Bake or cook",18],["Clean the house",12],["Plan the menu",6],["Send Christmas cards",2]] },
+  { q:"Name something associated with the North Pole.", a:[["Santa Claus",38],["Elves",26],["Reindeer",18],["Snow and ice",12],["Toy workshop",4],["Mrs. Claus",2]] },
+  { q:"Name something people donate to charity during Christmas.", a:[["Toys",36],["Food or canned goods",28],["Clothing",18],["Money",12],["Time or volunteering",4],["Blankets or coats",2]] },
+  { q:"Name a beloved fictional Christmas character.", a:[["Santa Claus",36],["Rudolph",22],["Frosty the Snowman",18],["The Grinch",14],["Buddy the Elf",8],["Jack Frost",2]] },
+  { q:"Name something people say they'll do after Christmas but never do.", a:[["Go on a diet or lose weight",36],["Organize the house",24],["Save more money",18],["Return unwanted gifts",12],["Call family more often",8],["Declutter old decorations",2]] }
 ];
 
-/* ═══════════════════════════════════════════════
-   DATA — 5 Final Round Cards
-═══════════════════════════════════════════════ */
-const FINAL = [
+const XMAS_FINAL = [
   {
-    title: "FINAL ROUND 2",
-    qs: [
-      {
-        q: "Name something you see at a Christmas market.",
-        a: [["Hot food stalls",32],["Handmade crafts and gifts",26],["Mulled wine or hot drinks",20],["Christmas trees for sale",14],["Carolers or live music",6],["Ice rink nearby",2]]
-      },
-      {
-        q: "Name something people send friends and family at Christmas.",
-        a: [["Christmas cards",38],["Gifts or packages",30],["Holiday text or email",18],["Video call",10],["Food gifts or hampers",3],["Holiday newsletter",1]]
-      },
-      {
-        q: "Name something that gets decorated at Christmas.",
-        a: [["Christmas tree",40],["Front door or entrance",22],["Fireplace or mantle",18],["Windows",12],["Staircase or banister",6],["Mailbox",2]]
-      },
-      {
-        q: "Name something you'd find in a Christmas cracker.",
-        a: [["Paper crown",34],["Joke or riddle",26],["Small toy or trinket",22],["Snap strip",12],["Candy",4],["Mini keyring",2]]
-      },
-      {
-        q: "Name something that smells like Christmas.",
-        a: [["Pine or Christmas tree",34],["Cinnamon",26],["Gingerbread or baking",20],["Peppermint",14],["Cloves or mulled spices",4],["Vanilla candles",2]]
-      }
+    title:"FINAL ROUND 2",
+    qs:[
+      { q:"Name something you see at a Christmas market.", a:[["Hot food stalls",32],["Handmade crafts and gifts",26],["Mulled wine or hot drinks",20],["Christmas trees for sale",14],["Carolers or live music",6],["Ice rink nearby",2]] },
+      { q:"Name something people send friends and family at Christmas.", a:[["Christmas cards",38],["Gifts or packages",30],["Holiday text or email",18],["Video call",10],["Food gifts or hampers",3],["Holiday newsletter",1]] },
+      { q:"Name something that gets decorated at Christmas.", a:[["Christmas tree",40],["Front door or entrance",22],["Fireplace or mantle",18],["Windows",12],["Staircase or banister",6],["Mailbox",2]] },
+      { q:"Name something you'd find in a Christmas cracker.", a:[["Paper crown",34],["Joke or riddle",26],["Small toy or trinket",22],["Snap strip",12],["Candy",4],["Mini keyring",2]] },
+      { q:"Name something that smells like Christmas.", a:[["Pine or Christmas tree",34],["Cinnamon",26],["Gingerbread or baking",20],["Peppermint",14],["Cloves or mulled spices",4],["Vanilla candles",2]] }
     ]
   },
   {
-    title: "FINAL ROUND 3",
-    qs: [
-      {
-        q: "Name something families do together on Christmas Day.",
-        a: [["Open presents",38],["Eat Christmas dinner",28],["Watch Christmas movies",18],["Play board games",10],["Go for a walk",4],["Take family photos",2]]
-      },
-      {
-        q: "Name a Christmas movie people love to rewatch.",
-        a: [["Elf",34],["Home Alone",26],["The Polar Express",18],["A Christmas Story",14],["Klaus",5],["The Santa Clause",3]]
-      },
-      {
-        q: "Name something people do in the snow.",
-        a: [["Build a snowman",38],["Have a snowball fight",28],["Go sledding",18],["Make snow angels",12],["Ski or snowboard",3],["Ice skate",1]]
-      },
-      {
-        q: "Name something that makes a Christmas party great.",
-        a: [["Fun games",32],["Great food",26],["Gift exchange",20],["Good music",14],["Photo booth",6],["Festive drinks",2]]
-      },
-      {
-        q: "Name something kids do to prepare for Christmas.",
-        a: [["Write a letter to Santa",36],["Decorate cookies",24],["Help decorate the tree",20],["Leave cookies and milk out",14],["Count down on advent calendar",4],["Watch Christmas movies",2]]
-      }
+    title:"FINAL ROUND 3",
+    qs:[
+      { q:"Name something families do together on Christmas Day.", a:[["Open presents",38],["Eat Christmas dinner",28],["Watch Christmas movies",18],["Play board games",10],["Go for a walk",4],["Take family photos",2]] },
+      { q:"Name a Christmas movie people love to rewatch.", a:[["Elf",34],["Home Alone",26],["The Polar Express",18],["A Christmas Story",14],["Klaus",5],["The Santa Clause",3]] },
+      { q:"Name something people do in the snow.", a:[["Build a snowman",38],["Have a snowball fight",28],["Go sledding",18],["Make snow angels",12],["Ski or snowboard",3],["Ice skate",1]] },
+      { q:"Name something that makes a Christmas party great.", a:[["Fun games",32],["Great food",26],["Gift exchange",20],["Good music",14],["Photo booth",6],["Festive drinks",2]] },
+      { q:"Name something kids do to prepare for Christmas.", a:[["Write a letter to Santa",36],["Decorate cookies",24],["Help decorate the tree",20],["Leave cookies and milk out",14],["Count down on advent calendar",4],["Watch Christmas movies",2]] }
     ]
   },
   {
-    title: "FINAL ROUND 4",
-    qs: [
-      {
-        q: "Name something people buy last-minute before Christmas.",
-        a: [["Gifts",40],["Food or groceries",26],["Gift wrapping supplies",16],["Gift cards",12],["Batteries",4],["Christmas decorations",2]]
-      },
-      {
-        q: "Name something people bring to a Christmas potluck.",
-        a: [["Dessert or cookies",34],["Casserole or side dish",26],["Drinks or wine",20],["Appetizers or dips",14],["Salad",4],["Rolls or bread",2]]
-      },
-      {
-        q: "Name something people watch on TV during Christmas.",
-        a: [["Christmas movies",38],["Hallmark holiday movies",22],["The Grinch",18],["Home Alone",12],["The Nutcracker",7],["Holiday specials",3]]
-      },
-      {
-        q: "Name a reason the holidays can be expensive.",
-        a: [["Buying gifts for everyone",38],["Holiday travel",24],["Christmas dinner food",18],["Decorations",12],["Holiday parties and events",6],["New outfit for events",2]]
-      },
-      {
-        q: "Name something people reuse from last Christmas.",
-        a: [["Decorations or ornaments",36],["Gift wrap or ribbon",26],["Artificial Christmas tree",20],["Gift boxes or bags",12],["Holiday cards",4],["Leftover food ideas",2]]
-      }
+    title:"FINAL ROUND 4",
+    qs:[
+      { q:"Name something people buy last-minute before Christmas.", a:[["Gifts",40],["Food or groceries",26],["Gift wrapping supplies",16],["Gift cards",12],["Batteries",4],["Christmas decorations",2]] },
+      { q:"Name something people bring to a Christmas potluck.", a:[["Dessert or cookies",34],["Casserole or side dish",26],["Drinks or wine",20],["Appetizers or dips",14],["Salad",4],["Rolls or bread",2]] },
+      { q:"Name something people watch on TV during Christmas.", a:[["Christmas movies",38],["Hallmark holiday movies",22],["The Grinch",18],["Home Alone",12],["The Nutcracker",7],["Holiday specials",3]] },
+      { q:"Name a reason the holidays can be expensive.", a:[["Buying gifts for everyone",38],["Holiday travel",24],["Christmas dinner food",18],["Decorations",12],["Holiday parties and events",6],["New outfit for events",2]] },
+      { q:"Name something people reuse from last Christmas.", a:[["Decorations or ornaments",36],["Gift wrap or ribbon",26],["Artificial Christmas tree",20],["Gift boxes or bags",12],["Holiday cards",4],["Leftover food ideas",2]] }
     ]
   },
   {
-    title: "FINAL ROUND 5",
-    qs: [
-      {
-        q: "Name something a mall Santa does.",
-        a: [["Listens to kids' wishes",40],["Takes photos with kids",28],["Says 'Ho ho ho'",18],["Gives out candy canes",10],["Asks if they've been good",3],["Waves to the crowd",1]]
-      },
-      {
-        q: "Name something people look forward to most about Christmas.",
-        a: [["Opening presents",34],["Seeing family",28],["Christmas dinner",20],["Time off work or school",12],["The Christmas morning feeling",4],["Holiday music",2]]
-      },
-      {
-        q: "Name something people regift at Christmas.",
-        a: [["Candles",30],["Chocolates or candy",26],["Gift baskets",18],["Books",14],["Scarves or hats",8],["Wine or champagne",4]]
-      },
-      {
-        q: "Name something about Christmas that has changed over the years.",
-        a: [["More online shopping",36],["Digital gift cards",22],["Fewer physical cards sent",18],["More virtual get-togethers",14],["Streaming holiday movies",8],["Less caroling",2]]
-      },
-      {
-        q: "Name something people do on New Year's Eve.",
-        a: [["Watch fireworks or countdown",38],["Party with friends",26],["Stay home and watch TV",18],["Make resolutions",12],["Go to a restaurant",4],["Travel",2]]
-      }
+    title:"FINAL ROUND 5",
+    qs:[
+      { q:"Name something a mall Santa does.", a:[["Listens to kids' wishes",40],["Takes photos with kids",28],["Says 'Ho ho ho'",18],["Gives out candy canes",10],["Asks if they've been good",3],["Waves to the crowd",1]] },
+      { q:"Name something people look forward to most about Christmas.", a:[["Opening presents",34],["Seeing family",28],["Christmas dinner",20],["Time off work or school",12],["The Christmas morning feeling",4],["Holiday music",2]] },
+      { q:"Name something people regift at Christmas.", a:[["Candles",30],["Chocolates or candy",26],["Gift baskets",18],["Books",14],["Scarves or hats",8],["Wine or champagne",4]] },
+      { q:"Name something about Christmas that has changed over the years.", a:[["More online shopping",36],["Digital gift cards",22],["Fewer physical cards sent",18],["More virtual get-togethers",14],["Streaming holiday movies",8],["Less caroling",2]] },
+      { q:"Name something people do on New Year's Eve.", a:[["Watch fireworks or countdown",38],["Party with friends",26],["Stay home and watch TV",18],["Make resolutions",12],["Go to a restaurant",4],["Travel",2]] }
     ]
   },
   {
-    title: "FINAL ROUND 6",
-    qs: [
-      {
-        q: "Name a word people associate with Christmas.",
-        a: [["Merry",32],["Joy or joyful",26],["Jolly",18],["'Tis the season",12],["Festive",8],["Peace",4]]
-      },
-      {
-        q: "Name something people do to celebrate Christmas at work.",
-        a: [["Secret Santa exchange",40],["Christmas party or lunch",28],["Decorate the office",16],["Wear ugly sweaters",10],["Bake treats to share",4],["Holiday bonus celebration",2]]
-      },
-      {
-        q: "Name something people do when they can't sleep on Christmas Eve.",
-        a: [["Watch Christmas movies",34],["Try to hear Santa",26],["Peek to see if gifts appeared",20],["Read a book",12],["Eat a snack",5],["Wake up siblings",3]]
-      },
-      {
-        q: "Name something people do with Christmas leftover food.",
-        a: [["Eat leftovers the next day",38],["Make sandwiches or new dishes",26],["Freeze it",18],["Send home with guests",12],["Throw it away",5],["Feed it to pets",1]]
-      },
-      {
-        q: "Name something people take photos of during Christmas.",
-        a: [["Family or group photos",36],["Gifts under the tree",24],["Christmas dinner or food",18],["Decorated house or tree",14],["Kids opening presents",6],["Snow outside",2]]
-      }
+    title:"FINAL ROUND 6",
+    qs:[
+      { q:"Name a word people associate with Christmas.", a:[["Merry",32],["Joy or joyful",26],["Jolly",18],["'Tis the season",12],["Festive",8],["Peace",4]] },
+      { q:"Name something people do to celebrate Christmas at work.", a:[["Secret Santa exchange",40],["Christmas party or lunch",28],["Decorate the office",16],["Wear ugly sweaters",10],["Bake treats to share",4],["Holiday bonus celebration",2]] },
+      { q:"Name something people do when they can't sleep on Christmas Eve.", a:[["Watch Christmas movies",34],["Try to hear Santa",26],["Peek to see if gifts appeared",20],["Read a book",12],["Eat a snack",5],["Wake up siblings",3]] },
+      { q:"Name something people do with Christmas leftover food.", a:[["Eat leftovers the next day",38],["Make sandwiches or new dishes",26],["Freeze it",18],["Send home with guests",12],["Throw it away",5],["Feed it to pets",1]] },
+      { q:"Name something people take photos of during Christmas.", a:[["Family or group photos",36],["Gifts under the tree",24],["Christmas dinner or food",18],["Decorated house or tree",14],["Kids opening presents",6],["Snow outside",2]] }
     ]
   }
 ];
 
-/* ═══════════════════════════════════════════════
-   SNOW
-═══════════════════════════════════════════════ */
-(function createSnow() {
-  const container = document.getElementById('snow');
-  const chars = ['❄','❅','❆','✦','✧','★'];
-  for (let i = 0; i < 22; i++) {
+/* ══════════════════════════════════════════════════
+   DATA – PARTY EDITION (40 regular + 5 final rounds)
+══════════════════════════════════════════════════ */
+const PARTY_REGULAR = [
+  { q:"Name something people do on weekends.", a:[["Sleep in",36],["Spend time with family",26],["Go out for food",18],["Watch TV or movies",12],["Exercise",5],["Clean the house",3]] },
+  { q:"Name something you'd find in a refrigerator.", a:[["Leftovers",28],["Drinks or beverages",24],["Vegetables",18],["Condiments",16],["Dairy or cheese",10],["Fruit",4]] },
+  { q:"Name a reason people call in sick to work.", a:[["They actually are sick",38],["Just want a day off",26],["Hangover",16],["Family emergency",12],["Burnout",5],["Bad weather",3]] },
+  { q:"Name something people do at a birthday party.", a:[["Eat cake",36],["Sing Happy Birthday",28],["Open presents",18],["Play games",10],["Take photos",6],["Dance",2]] },
+  { q:"Name a popular fast food restaurant.", a:[["McDonald's",38],["Burger King / Wendy's",22],["Subway",18],["Taco Bell",12],["Chick-fil-A",7],["Pizza Hut",3]] },
+  { q:"Name something you'd find in a garage.", a:[["A car",36],["Tools",26],["Old stuff / junk",18],["Bikes",12],["Lawn equipment",5],["Sports equipment",3]] },
+  { q:"Name something people argue about in a car.", a:[["Music or the radio",30],["Temperature — AC or heat",24],["Directions",20],["Driving too fast or slow",16],["Where to eat",8],["Leg room",2]] },
+  { q:"Name a reason someone might be late to work.", a:[["Traffic",38],["Overslept",28],["Couldn't find parking",16],["Kids being slow",10],["Car trouble",6],["Bad weather",2]] },
+  { q:"Name something people do to relax after work.", a:[["Watch TV or Netflix",34],["Have a drink",22],["Take a nap",18],["Exercise",14],["Cook or eat",8],["Scroll on their phone",4]] },
+  { q:"Name a popular pizza topping.", a:[["Pepperoni",34],["Extra cheese",28],["Mushrooms",16],["Sausage",12],["Olives",6],["Onions",4]] },
+  { q:"Name something parents say to their kids.", a:[["'Clean your room'",32],["'Do your homework'",26],["'Be careful'",18],["'Eat your vegetables'",14],["'Turn that down'",7],["'Because I said so'",3]] },
+  { q:"Name something people do on their phone during a meal.", a:[["Scroll social media",36],["Text someone",26],["Take food photos",18],["Watch videos",12],["Check emails",5],["Play games",3]] },
+  { q:"Name a pet that people commonly own.", a:[["Dog",42],["Cat",30],["Fish",14],["Bird",7],["Hamster or rabbit",5],["Reptile",2]] },
+  { q:"Name something people do on a rainy day.", a:[["Watch movies or TV",36],["Stay indoors and relax",22],["Read a book",18],["Cook or bake",12],["Take a nap",9],["Clean",3]] },
+  { q:"Name a popular board game.", a:[["Monopoly",36],["Scrabble",22],["Clue / Cluedo",18],["Jenga",12],["Sorry!",8],["Risk",4]] },
+  { q:"Name something people order at a coffee shop.", a:[["Regular coffee or espresso",36],["Latte",26],["Cappuccino",18],["Frappuccino or iced coffee",12],["Tea",6],["A pastry or snack",2]] },
+  { q:"Name something that slows down traffic.", a:[["Accidents",38],["Road construction",26],["Rush hour",18],["Bad weather",10],["Slow drivers",6],["Parking issues",2]] },
+  { q:"Name something people do when they can't sleep.", a:[["Scroll on their phone",32],["Watch TV",26],["Read",18],["Get a snack",12],["Count sheep",8],["Listen to music",4]] },
+  { q:"Name something people spend too much money on.", a:[["Eating out",34],["Online shopping",26],["Coffee",18],["Clothes",14],["Subscriptions",5],["Entertainment",3]] },
+  { q:"Name something you'd find in a junk drawer.", a:[["Old batteries",30],["Random cables or chargers",26],["Takeout menus",18],["Pens or pencils",14],["Keys",8],["Rubber bands",4]] },
+  { q:"Name something people do at a barbecue.", a:[["Grill food",36],["Drink beer or soda",24],["Socialize and chat",18],["Play lawn games",12],["Sit outside",7],["Listen to music",3]] },
+  { q:"Name a popular TV show genre.", a:[["Reality TV",32],["Crime or drama",26],["Comedy",20],["Documentaries",12],["Sci-fi or fantasy",7],["Horror",3]] },
+  { q:"Name something people do on a first date.", a:[["Dinner at a restaurant",36],["Watch a movie",22],["Get coffee",18],["Go for a walk",12],["Mini golf or activity",9],["Cook together",3]] },
+  { q:"Name something that makes a house feel like a home.", a:[["Family or loved ones",36],["Cozy furniture or decor",24],["Good smells or cooking",18],["Photos on the walls",12],["Pets",7],["Personal touches",3]] },
+  { q:"Name something people always lose.", a:[["Keys",36],["Phone",26],["Glasses",18],["Remote control",12],["Wallet",6],["Socks",2]] },
+  { q:"Name a reason people move to a new city.", a:[["A new job",38],["Relationship or marriage",24],["Better cost of living",18],["Family",12],["A fresh start",6],["School",2]] },
+  { q:"Name something people do at a wedding.", a:[["Dance",36],["Eat and drink",26],["Cry happy tears",18],["Take photos",12],["Give a speech",5],["Catch the bouquet",3]] },
+  { q:"Name something you'd find at a farmer's market.", a:[["Fresh vegetables",36],["Fruits",24],["Homemade bread or baked goods",18],["Flowers",12],["Honey or jams",7],["Handmade crafts",3]] },
+  { q:"Name something people do on their lunch break.", a:[["Eat lunch",38],["Scroll on their phone",24],["Walk or exercise",16],["Run errands",12],["Chat with coworkers",7],["Nap",3]] },
+  { q:"Name a reason someone might quit their job.", a:[["Bad boss",34],["Better opportunity elsewhere",26],["Burnout or stress",18],["Low pay",14],["No work-life balance",6],["Boredom",2]] },
+  { q:"Name something people take to the beach.", a:[["Sunscreen",34],["Towels",26],["Snacks or food",18],["Umbrella",12],["Sunglasses",7],["A book",3]] },
+  { q:"Name something people do to procrastinate.", a:[["Scroll social media",36],["Watch YouTube or Netflix",26],["Clean instead",16],["Snack",12],["Browse the internet",8],["Nap",2]] },
+  { q:"Name something people look forward to about Fridays.", a:[["End of work or school week",38],["Going out or having plans",24],["Sleeping in the next day",18],["Having a drink",12],["Watching TV",5],["No early alarms",3]] },
+  { q:"Name something people always have in their bathroom.", a:[["Toothbrush and toothpaste",36],["Toilet paper",28],["Soap or shampoo",18],["Towels",12],["A mirror",4],["Medication",2]] },
+  { q:"Name a popular snack food.", a:[["Chips or crisps",36],["Popcorn",26],["Chocolate",18],["Nuts",12],["Pretzels",6],["Crackers",2]] },
+  { q:"Name something that always makes people smile.", a:[["Puppies or cute animals",36],["Babies or kids laughing",26],["Hearing a favorite song",18],["A compliment",12],["Good news",6],["Funny memes",2]] },
+  { q:"Name something people do when they're nervous.", a:[["Fidget or bite nails",30],["Talk too much",24],["Sweat",18],["Laugh nervously",14],["Pace back and forth",10],["Go very quiet",4]] },
+  { q:"Name a popular vacation destination.", a:[["The beach",36],["Europe",22],["A theme park",16],["The mountains",12],["A cruise",8],["A city break",6]] },
+  { q:"Name something people collect.", a:[["Books",30],["Coins or stamps",24],["Sports cards or memorabilia",18],["Art",14],["Shoes or sneakers",10],["Vinyl records",4]] },
+  { q:"Name something people do the night before a big event.", a:[["Lay out their outfit",32],["Can't sleep from nerves",26],["Prepare or rehearse",18],["Set multiple alarms",14],["Call a friend",7],["Eat a good meal",3]] }
+];
+
+const PARTY_FINAL = [
+  {
+    title:"FINAL ROUND 1",
+    qs:[
+      { q:"Name something people always forget to pack when traveling.", a:[["Phone charger",36],["Toothbrush",26],["Phone or passport",18],["Medication",12],["Extra clothes",6],["Sunscreen",2]] },
+      { q:"Name something people do in the morning before work.", a:[["Make or drink coffee",36],["Shower",26],["Check their phone",18],["Eat breakfast",12],["Exercise",6],["Feed pets",2]] },
+      { q:"Name something people complain about at restaurants.", a:[["Slow service",34],["Cold food",26],["Wrong order",18],["Too expensive",14],["Noisy atmosphere",6],["Small portions",2]] },
+      { q:"Name something people buy when they're stressed.", a:[["Comfort food",34],["Alcohol",22],["Clothes",18],["Random online shopping",16],["Chocolate",7],["Coffee",3]] },
+      { q:"Name something that gets stuck in your head.", a:[["A song or jingle",40],["A TV commercial",24],["A catchphrase",18],["A movie quote",10],["Someone's laugh",5],["A news story",3]] }
+    ]
+  },
+  {
+    title:"FINAL ROUND 2",
+    qs:[
+      { q:"Name something that makes a road trip fun.", a:[["A great playlist",36],["Snacks",26],["Good company",20],["Road trip games or trivia",12],["Scenic stops",4],["Podcasts or audiobooks",2]] },
+      { q:"Name a reason dogs are the best pets.", a:[["Unconditional love",36],["Great company",24],["Loyalty",18],["Fun to play with",14],["Keep you active",6],["They're funny",2]] },
+      { q:"Name something you'd find at a sporting event.", a:[["Crowd cheering",34],["Hotdogs or stadium food",26],["Beer or drinks",18],["Merchandise stalls",14],["Jumbotron screen",5],["Face-painted fans",3]] },
+      { q:"Name a reason people cry.", a:[["A sad movie",32],["A breakup",24],["Frustration",18],["A touching moment",14],["Physical pain",8],["Happy tears",4]] },
+      { q:"Name something people do on New Year's Day.", a:[["Recover from the night before",34],["Watch TV all day",24],["Eat leftovers",18],["Set new goals or resolutions",14],["Spend time with family",8],["Go outside for fresh air",2]] }
+    ]
+  },
+  {
+    title:"FINAL ROUND 3",
+    qs:[
+      { q:"Name something people do when they're bored.", a:[["Scroll on their phone",38],["Watch TV or Netflix",24],["Eat",18],["Sleep or nap",12],["Go for a walk",5],["Call a friend",3]] },
+      { q:"Name something people splurge on.", a:[["Dining out",32],["Vacations",26],["Electronics",18],["Clothes or shoes",14],["A nice car",7],["Home upgrades",3]] },
+      { q:"Name something you'd find at a garage sale.", a:[["Old clothes",32],["Books",24],["Toys",18],["Old electronics",14],["Kitchen items",9],["Furniture",3]] },
+      { q:"Name a sign that summer is over.", a:[["Kids go back to school",38],["Cooler weather",26],["Leaves start changing",18],["Days get shorter",12],["No more barbecues",4],["Pool closes",2]] },
+      { q:"Name something people teach their kids.", a:[["How to ride a bike",34],["Good manners",26],["How to cook",18],["Financial basics",12],["How to swim",8],["How to drive",2]] }
+    ]
+  },
+  {
+    title:"FINAL ROUND 4",
+    qs:[
+      { q:"Name something people do on vacation.", a:[["Relax on the beach",36],["Sightseeing or tourism",26],["Eat local food",18],["Take photos",12],["Go shopping",6],["Swimming",2]] },
+      { q:"Name something that always makes people feel better.", a:[["Talking to a friend",32],["A hug",26],["Good food",18],["A good night's sleep",14],["Exercise",7],["Music",3]] },
+      { q:"Name something people do to cheer someone up.", a:[["Tell jokes or make them laugh",32],["Take them out for food",24],["Listen to them",20],["Send flowers or a gift",14],["Watch a funny movie",7],["Give a hug",3]] },
+      { q:"Name something that takes too long.", a:[["Waiting in line",36],["Rush-hour traffic",26],["Downloading or buffering",18],["A doctor's waiting room",12],["Airport security",6],["Cooking",2]] },
+      { q:"Name something people keep in their car.", a:[["Phone charger",30],["Snacks",24],["Spare change",18],["Sunglasses",14],["Umbrella",10],["First aid kit",4]] }
+    ]
+  },
+  {
+    title:"FINAL ROUND 5",
+    qs:[
+      { q:"Name a popular hobby people pick up.", a:[["Cooking or baking",30],["Gardening",24],["Painting or drawing",18],["Exercise or gym",14],["Gaming",10],["Photography",4]] },
+      { q:"Name something people do at a concert.", a:[["Sing along",36],["Dance",26],["Record videos on their phone",18],["Buy merchandise",12],["Drink",6],["Crowd surf",2]] },
+      { q:"Name something people wish they had more of.", a:[["Money",40],["Time",30],["Sleep",16],["Vacation days",8],["Energy",4],["Space in their home",2]] },
+      { q:"Name something people do to celebrate good news.", a:[["Go out to dinner",34],["Tell family and friends",26],["Toast with drinks",18],["Go out dancing",12],["Buy themselves something",8],["Post on social media",2]] },
+      { q:"Name something people do at a house party.", a:[["Drink and socialize",34],["Dance",26],["Play party games",18],["Meet new people",12],["Eat the food",7],["Take photos",3]] }
+    ]
+  }
+];
+
+/* ══════════════════════════════════════════════════
+   STATE
+══════════════════════════════════════════════════ */
+let activeTheme = 'xmas'; // 'xmas' | 'party'
+
+/* ══════════════════════════════════════════════════
+   PARTICLES
+══════════════════════════════════════════════════ */
+const XMAS_CHARS  = ['❄','❅','❆','✦','✧','★'];
+const PARTY_CHARS = ['★','✦','✧','◆','●','♦'];
+
+function buildParticles(theme) {
+  const container = document.getElementById('particles');
+  container.innerHTML = '';
+  const chars = theme === 'xmas' ? XMAS_CHARS : PARTY_CHARS;
+  for (let i = 0; i < 24; i++) {
     const f = document.createElement('div');
-    f.className = 'flake';
+    f.className = 'particle';
     f.textContent = chars[Math.random() * chars.length | 0];
+    const color = theme === 'xmas'
+      ? `rgba(255,255,255,${.25 + Math.random()*.35})`
+      : `rgba(255,215,0,${.2 + Math.random()*.3})`;
     f.style.cssText = [
       `left:${Math.random()*100}%`,
       `font-size:${10 + Math.random()*16}px`,
+      `color:${color}`,
       `animation-duration:${9 + Math.random()*14}s`,
-      `animation-delay:${-Math.random()*22}s`,
-      `opacity:${.25 + Math.random()*.4}`
+      `animation-delay:${-Math.random()*22}s`
     ].join(';');
     container.appendChild(f);
   }
-})();
+}
+buildParticles('xmas');
 
-/* ═══════════════════════════════════════════════
-   UNLOCK LOGIC
-═══════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════
+   UNLOCK
+══════════════════════════════════════════════════ */
 if (localStorage.getItem('xmas_bonus_unlocked')) showApp();
 
 document.getElementById('unlock-form').addEventListener('submit', function(e) {
@@ -772,19 +721,58 @@ function showApp() {
   document.getElementById('unlock-screen').style.display = 'none';
   const app = document.getElementById('app-screen');
   app.style.display = 'flex';
-  renderRegular();
-  renderFinal();
+  renderAll();
 }
 
-/* ═══════════════════════════════════════════════
-   RENDER REGULAR CARDS
-═══════════════════════════════════════════════ */
-function renderRegular() {
+/* ══════════════════════════════════════════════════
+   THEME SWITCH
+══════════════════════════════════════════════════ */
+function switchTheme(theme) {
+  if (theme === activeTheme) return;
+  activeTheme = theme;
+
+  // Body class
+  document.body.className = theme;
+
+  // Picker button states
+  document.getElementById('btn-xmas').classList.toggle('active',  theme === 'xmas');
+  document.getElementById('btn-party').classList.toggle('active', theme === 'party');
+
+  // Header title + headings
+  if (theme === 'xmas') {
+    document.getElementById('app-title').textContent    = '🎄 Christmas Friendly Feud';
+    document.getElementById('reg-heading').textContent  = 'Bonus Christmas Question Cards';
+    document.getElementById('fin-heading').textContent  = 'Bonus Christmas Final Round Cards';
+  } else {
+    document.getElementById('app-title').textContent    = '🎉 Friendly Feud — Party Edition';
+    document.getElementById('reg-heading').textContent  = 'Party Edition Question Cards';
+    document.getElementById('fin-heading').textContent  = 'Party Edition Final Round Cards';
+  }
+
+  // Particles
+  buildParticles(theme);
+
+  // Re-render cards
+  renderAll();
+}
+
+/* ══════════════════════════════════════════════════
+   RENDER
+══════════════════════════════════════════════════ */
+function renderAll() {
+  const regData   = activeTheme === 'xmas' ? XMAS_REGULAR  : PARTY_REGULAR;
+  const finalData = activeTheme === 'xmas' ? XMAS_FINAL    : PARTY_FINAL;
+  document.getElementById('regular-grid').innerHTML = '';
+  document.getElementById('final-grid').innerHTML   = '';
+  renderRegular(regData);
+  renderFinal(finalData);
+}
+
+function renderRegular(data) {
   const grid = document.getElementById('regular-grid');
-  REGULAR.forEach((card, i) => {
+  data.forEach((card, i) => {
     const el = document.createElement('div');
     el.className = 'q-card';
-    el.dataset.id = `r${i}`;
     el.innerHTML = `
       <div class="q-card-head">
         <div class="q-num">${i + 1}</div>
@@ -793,26 +781,23 @@ function renderRegular() {
       </div>
       <div class="q-answers" id="ans-r${i}">
         <div class="ans-grid">
-          ${card.a.map(([txt,pts]) => `
+          ${card.a.map(([t,p]) => `
             <div class="ans-row">
-              <div class="ans-label">${txt}</div>
-              <div class="ans-pts">${pts}</div>
+              <div class="ans-label">${t}</div>
+              <div class="ans-pts">${p}</div>
             </div>`).join('')}
         </div>
       </div>
       <div class="q-hint" id="hint-r${i}">Tap to reveal answers</div>
     `;
-    el.addEventListener('click', () => toggle(`r${i}`));
+    el.addEventListener('click', () => toggleCard(`r${i}`));
     grid.appendChild(el);
   });
 }
 
-/* ═══════════════════════════════════════════════
-   RENDER FINAL ROUND CARDS
-═══════════════════════════════════════════════ */
-function renderFinal() {
+function renderFinal(data) {
   const grid = document.getElementById('final-grid');
-  FINAL.forEach((round, ri) => {
+  data.forEach((round, ri) => {
     const card = document.createElement('div');
     card.className = 'fr-card';
     card.innerHTML = `
@@ -828,25 +813,24 @@ function renderFinal() {
             <div class="fr-q-chev" id="ch-f${ri}-${qi}">▼</div>
           </div>
           <div class="fr-answers" id="ans-f${ri}-${qi}">
-            <div class="ans-grid">
-              ${q.a.map(([txt,pts]) => `
+            <div class="ans-grid" style="margin-top:10px">
+              ${q.a.map(([t,p]) => `
                 <div class="ans-row">
-                  <div class="ans-label">${txt}</div>
-                  <div class="ans-pts">${pts}</div>
+                  <div class="ans-label">${t}</div>
+                  <div class="ans-pts">${p}</div>
                 </div>`).join('')}
             </div>
           </div>
-        </div>
-      `).join('')}
+        </div>`).join('')}
     `;
     grid.appendChild(card);
   });
 }
 
-/* ═══════════════════════════════════════════════
+/* ══════════════════════════════════════════════════
    TOGGLE HELPERS
-═══════════════════════════════════════════════ */
-function toggle(id) {
+══════════════════════════════════════════════════ */
+function toggleCard(id) {
   const ans  = document.getElementById(`ans-${id}`);
   const ch   = document.getElementById(`ch-${id}`);
   const hint = document.getElementById(`hint-${id}`);
@@ -856,7 +840,7 @@ function toggle(id) {
 }
 
 function toggleFR(ri, qi) {
-  const id = `f${ri}-${qi}`;
+  const id  = `f${ri}-${qi}`;
   const ans = document.getElementById(`ans-${id}`);
   const ch  = document.getElementById(`ch-${id}`);
   const open = ans.classList.toggle('open');
@@ -864,10 +848,12 @@ function toggleFR(ri, qi) {
 }
 
 function bulkToggle(type, expand) {
+  const count = type === 'regular' ? 40 : 5;
   if (type === 'regular') {
-    REGULAR.forEach((_, i) => setCard(`r${i}`, expand));
+    for (let i = 0; i < count; i++) setCard(`r${i}`, expand);
   } else {
-    FINAL.forEach((round, ri) => round.qs.forEach((_, qi) => setFR(ri, qi, expand)));
+    const rounds = activeTheme === 'xmas' ? XMAS_FINAL : PARTY_FINAL;
+    rounds.forEach((r, ri) => r.qs.forEach((_, qi) => setFR(ri, qi, expand)));
   }
 }
 
@@ -890,9 +876,9 @@ function setFR(ri, qi, open) {
   ch.textContent = open ? '▲' : '▼';
 }
 
-/* ═══════════════════════════════════════════════
+/* ══════════════════════════════════════════════════
    TAB SWITCH
-═══════════════════════════════════════════════ */
+══════════════════════════════════════════════════ */
 function showTab(name, btn) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
